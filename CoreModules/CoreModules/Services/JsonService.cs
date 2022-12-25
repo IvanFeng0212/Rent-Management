@@ -12,6 +12,8 @@ namespace CoreModules.Services
 {
     public class JsonService : IJsonService
     {
+        private readonly string cryptoKey = Environment.GetEnvironmentVariable("RM_SecretKey");
+
         /// <summary>
         /// 取得指定 Json 檔所有資料
         /// </summary>
@@ -30,7 +32,7 @@ namespace CoreModules.Services
 
                 var jsonBaseModel = JsonConvert.DeserializeObject<JsonBaseModel>(jsonString);
 
-                return JsonConvert.DeserializeObject<T>(jsonBaseModel.EncryptString.DecryptString("TODO"));
+                return JsonConvert.DeserializeObject<T>(jsonBaseModel.EncryptString.DecryptString(cryptoKey));
             }
         }
 
@@ -44,7 +46,7 @@ namespace CoreModules.Services
 
             var JsonBaseModel = new JsonBaseModel()
             {
-                EncryptString = JsonConvert.SerializeObject(saveData).EncryptString("TODO")
+                EncryptString = JsonConvert.SerializeObject(saveData).EncryptString(cryptoKey)
             };
 
             File.WriteAllText(filePath, JsonConvert.SerializeObject(JsonBaseModel));
