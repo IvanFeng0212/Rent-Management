@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rent-Management", "Rent-Man
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoreModules", "CoreModules", "{DB696415-622A-46DD-B44C-20CD380F18EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModules", "CoreModules\CoreModules\CoreModules.csproj", "{3520E9E8-6EED-467E-99D4-B1E40242A077}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,16 +17,9 @@ Global
 		{14923AF2-BB1B-49CC-ADE5-7E2B5EC9F7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14923AF2-BB1B-49CC-ADE5-7E2B5EC9F7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14923AF2-BB1B-49CC-ADE5-7E2B5EC9F7A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3520E9E8-6EED-467E-99D4-B1E40242A077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3520E9E8-6EED-467E-99D4-B1E40242A077}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3520E9E8-6EED-467E-99D4-B1E40242A077}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3520E9E8-6EED-467E-99D4-B1E40242A077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3520E9E8-6EED-467E-99D4-B1E40242A077} = {DB696415-622A-46DD-B44C-20CD380F18EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {815633C3-D61E-4FFE-8B2E-4716A6C64678}
