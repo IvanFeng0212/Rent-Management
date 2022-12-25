@@ -1,0 +1,14 @@
+{
+  "SysEnums": [
+    {
+      "ItemId": "1",
+      "ItemValue": "Fixed Fee",
+      "ItemName": "固定費用"
+    },
+    {
+      "ItemId": "2",
+      "ItemValue": "Public Fee",
+      "ItemName": "公共費用"
+    }
+  ]
+}

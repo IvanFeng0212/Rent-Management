@@ -1,0 +1,22 @@
+{
+  "SysEnumDetails": [
+    {
+      "ItemId": "1",
+      "GuId": "",
+      "Name": "房租",
+      "Amount": 0
+    },
+    {
+      "ItemId": "1",
+      "GuId": "",
+      "Name": "管理費",
+      "Amount": 0
+    },
+    {
+      "ItemId": "2",
+      "GuId": "",
+      "Name": "水費",
+      "Amount": 0
+    }
+  ]
+}
