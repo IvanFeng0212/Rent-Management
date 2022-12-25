@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Rent-Management/Rent-Management.csproj", "Rent-Management/"]
+COPY ["CoreModules/CoreModules/CoreModules.csproj", "CoreModules/CoreModules/"]
 RUN dotnet restore "Rent-Management/Rent-Management.csproj"
 COPY . .
 WORKDIR "/src/Rent-Management"
