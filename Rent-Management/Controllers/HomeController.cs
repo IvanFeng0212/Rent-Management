@@ -15,6 +15,10 @@ namespace Rent_Management.Controllers
 
         public IActionResult Index()
         {
+            var secretKey = Environment.GetEnvironmentVariable("SecretKey");
+
+            ViewBag.Env = string.IsNullOrEmpty(secretKey) ? "None" : secretKey;
+
             return View();
         }
 
