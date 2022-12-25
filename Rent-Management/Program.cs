@@ -1,7 +1,12 @@
+using CoreModules.Interfaces;
+using CoreModules.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IJsonService, JsonService>();
 
 var app = builder.Build();
 

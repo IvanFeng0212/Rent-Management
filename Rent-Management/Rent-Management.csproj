@@ -17,4 +17,19 @@
     <ProjectReference Include="..\CoreModules\CoreModules\CoreModules.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Datas\Persons.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datas\SysEnumDetails.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datas\SysEnums.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datas\Transactions.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
