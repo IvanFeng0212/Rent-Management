@@ -19,4 +19,4 @@ RUN dotnet publish "Rent-Management.csproj" -c Release -o /app/publish /p:UseApp
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Rent-Management.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Rent-Management.dll
