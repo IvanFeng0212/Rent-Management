@@ -1,0 +1,90 @@
+﻿@using CoreModules.Models
+@model List<PublicFee>
+
+<div class="container">
+    <div class="row">
+      <form id="form-add">
+          <div class="mb-3 row">
+            <label for="publicFee-item" class="col-sm-2 col-form-label">項目</label>
+            <div class="col-sm-10">
+                <select id="publicFee-item" name="name_En" class="form-select">
+                    <option selected value="">===請選擇===</option>
+                        <option value="rent">房租</option>
+                        <option value="management ">管理費</option>
+                </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="publicFee-amount" class="col-sm-2 col-form-label">金額</label>
+            <div class="col-sm-10">
+                <input type="number" min="0" max="99999" name="amount" class="form-control" id="publicFee-amount">
+            </div>
+          </div>
+          <div class="mb-3 col-sm-12 text-center">
+               <button type="submit" id="btn-add-publicFee" class="w-100 btn btn-success">新增</button>
+          </div>
+      </form>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th>名稱</th>
+                    <th>金額</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var publicFee in Model)
+                    {
+                        <tr data-guid="@publicFee.GuId">
+                            <td>@publicFee.Name</td>
+                            <td>@publicFee.Amount.ToString("N0")</td>
+                            <td>
+                                    <button type="button" class="btn btn-danger btn-delete" data-guid="@publicFee.GuId">刪除</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        let selectPublicFeeName = '';
+        $('#publicFee-item').unbind('change').bind('change',function(){
+            selectPublicFeeName = $(this).find('option:selected').text();
+        });
+
+        $("#form-add").unbind('submit').bind('submit',function(e){
+            e.preventDefault();
+            $.ajax({
+                url: 'PublicFee',
+                type: 'POST',
+                data: $(this).serialize() + '&' + 'name=' + selectPublicFeeName,
+                success:function(){
+                    alert('Add success!!');
+                    location.reload();
+                }
+            });
+        });
+
+        $(".btn-delete").unbind('click').bind('click',function(){
+            $.ajax({
+                url: 'PublicFee',
+                type: 'DELETE',
+                data: {ItemId: $(this).data("guid")},
+                success:function(){
+                    alert('Delete success!!');
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>

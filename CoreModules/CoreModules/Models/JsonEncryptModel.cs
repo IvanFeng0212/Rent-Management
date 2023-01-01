@@ -1,6 +1,6 @@
 ﻿namespace CoreModules.Models
 {
-    public class JsonBaseModel
+    public class JsonEncryptModel
     {
         public string EncryptString { get; set; }
     }

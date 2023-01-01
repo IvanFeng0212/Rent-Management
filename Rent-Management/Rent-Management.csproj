@@ -21,6 +21,9 @@
     <Content Update="Datas\Persons.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="Datas\PublicFee.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Datas\SysEnumDetails.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

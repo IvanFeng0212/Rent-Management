@@ -1,6 +1,6 @@
-﻿namespace Rent_Management.Models
+﻿namespace CoreModules.Models
 {
-    public class Person
+    public class FeeBase
     {
         /// <summary>
         /// Id
@@ -8,8 +8,8 @@
         public string GuId { get; set; }
 
         /// <summary>
-        /// 名字
+        /// 金額
         /// </summary>
-        public string Name { get; set; }
+        public int Amount { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Rent_Management.Models
+﻿namespace CoreModules.Models
 {
     public class SysEnum
     {
