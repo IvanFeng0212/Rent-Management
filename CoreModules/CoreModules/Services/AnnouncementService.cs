@@ -39,5 +39,36 @@ namespace CoreModules.Services
 
             return announcementModel.Msg;
         }
+
+        public async Task DeleteNoMatchSysEnumAsync()
+        {
+            var sysEnums = await this._sysEnumService.GetAllAsync();
+
+            var sysEnumNames = sysEnums.Select(x => x.Name).ToList();
+
+            var fixedFees = await this._fixedFeeService.GetAllAsync();
+            fixedFees.Where(f => !sysEnumNames.Contains(f.Name))
+                .ToList()
+                .ForEach(async (f) =>
+                {
+                    await this._fixedFeeService.DeleteAsync(f.GuId);
+                });
+
+            var publicFees = await this._publicFeeService.GetAllAsync();
+            publicFees.Where(p => !sysEnumNames.Contains(p.Name))
+                .ToList()
+                .ForEach(async (p) =>
+                {
+                    await this._publicFeeService.DeleteAsync(p.GuId);
+                });
+
+            var personFees = await this._personTransService.GetAllAsync();
+            personFees.Where(p => !sysEnumNames.Contains(p.DebitName) || !sysEnumNames.Contains(p.SideName))
+                .ToList()
+                .ForEach(async (p) =>
+                {
+                    await this._personTransService.DeleteAsync(p.GuId);
+                });
+        }
     }
 }

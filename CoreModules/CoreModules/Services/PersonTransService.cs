@@ -95,7 +95,7 @@ namespace CoreModules.Services
                 stringBuilder.AppendLine($"{announcementModel.Msg} = {announcementModel.Amount.ToString("N0")}");
 
                 // 基本: xx,xxx / x = x,xxx
-                stringBuilder.AppendLine($"基本 : {announcementModel.Amount} / {personDic.Count} = {avgFee.ToString("N0")}");
+                stringBuilder.AppendLine($"基本 : {announcementModel.Amount.ToString("N0")} / {personDic.Count} = {avgFee.ToString("N0")}");
 
                 stringBuilder.AppendLine("----------------------------------------");
             }

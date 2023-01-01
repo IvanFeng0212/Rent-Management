@@ -19,6 +19,8 @@ namespace Rent_Management.Controllers
 
         public async Task<IActionResult> Index()
         {
+            Task.WaitAll(this._announcementService.DeleteNoMatchSysEnumAsync(), Task.Delay(TimeSpan.FromSeconds(1)));
+
             var secretKey = Environment.GetEnvironmentVariable("RM_SecretKey");
 
             ViewBag.Env = string.IsNullOrEmpty(secretKey) ? "" : secretKey;
