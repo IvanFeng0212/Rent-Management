@@ -1,5 +1,5 @@
 ﻿@using CoreModules.Models
-@model List<PublicFee>
+@model PublicFeeViewModel
 
 <div class="container">
     <div class="row">
@@ -9,15 +9,19 @@
             <div class="col-sm-10">
                 <select id="publicFee-item" name="name_En" class="form-select">
                     <option selected value="">===請選擇===</option>
-                        <option value="rent">房租</option>
-                        <option value="management ">管理費</option>
+                        @{
+                            foreach(var item in Model.PublicFeeItems)
+                            {
+                                <option value="@item.Name_En">@item.Name</option>
+                            }
+                        }
                 </select>
             </div>
           </div>
           <div class="mb-3 row">
             <label for="publicFee-amount" class="col-sm-2 col-form-label">金額</label>
             <div class="col-sm-10">
-                <input type="number" min="0" max="99999" name="amount" class="form-control" id="publicFee-amount">
+                <input type="number" min="1" max="30000" name="amount" class="form-control" id="publicFee-amount">
             </div>
           </div>
           <div class="mb-3 col-sm-12 text-center">
@@ -37,7 +41,7 @@
             </thead>
             <tbody>
                 @{
-                    foreach(var publicFee in Model)
+                    foreach(var publicFee in Model.PublicFees)
                     {
                         <tr data-guid="@publicFee.GuId">
                             <td>@publicFee.Name</td>
@@ -64,12 +68,14 @@
 
         $("#form-add").unbind('submit').bind('submit',function(e){
             e.preventDefault();
+
+            if(!$('#publicFee-item').val() || !$('#publicFee-amount').val()) return;
+
             $.ajax({
                 url: 'PublicFee',
                 type: 'POST',
                 data: $(this).serialize() + '&' + 'name=' + selectPublicFeeName,
                 success:function(){
-                    alert('Add success!!');
                     location.reload();
                 }
             });
@@ -81,7 +87,6 @@
                 type: 'DELETE',
                 data: {ItemId: $(this).data("guid")},
                 success:function(){
-                    alert('Delete success!!');
                     location.reload();
                 }
             });

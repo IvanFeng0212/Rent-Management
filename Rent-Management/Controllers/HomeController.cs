@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreModules.Models;
+using CoreModules.Services;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Rent_Management.Models;
 using System.Diagnostics;
 

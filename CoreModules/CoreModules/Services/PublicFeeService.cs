@@ -16,8 +16,6 @@ namespace CoreModules.Services
 
         public async Task AddAsync(PublicFee data)
         {
-            data.GuId = Guid.NewGuid().ToString();
-
             await base.AddAsync<PublicFee>(nameof(PublicFee), data);
         }
 

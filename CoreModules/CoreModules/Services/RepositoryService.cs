@@ -11,7 +11,7 @@ namespace CoreModules.Services
         /// <summary>
         /// 取得指定 Json 檔所有資料
         /// </summary>
-        public async Task<List<T>> GetAllAsync<T>(string jsonFileName)
+        protected async Task<List<T>> GetAllAsync<T>(string jsonFileName)
         {
             var filePath = GetJsonFilePath(jsonFileName);
 
@@ -38,6 +38,8 @@ namespace CoreModules.Services
         public async Task AddAsync<T>(string jsonFileName,T data)
         {
             if (data == null) return;
+
+            data.GetType().GetProperty("GuId").SetValue(data, Guid.NewGuid().ToString());
 
             var datas = await this.GetAllAsync<T>(jsonFileName);
            

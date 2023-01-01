@@ -1,22 +1,19 @@
 {
-  "SysEnumDetails": [
+  "Data": [
     {
-      "ItemId": "1",
-      "GuId": "",
-      "Name": "房租",
-      "Amount": 0
+      "GuId": "3889b85d-0d37-4fa8-b8c7-49878d8493ca",
+      "ItemType": "PublicFee",
+      "Name": "房租"
     },
     {
-      "ItemId": "1",
-      "GuId": "",
-      "Name": "管理費",
-      "Amount": 0
+      "GuId": "0d877d4e-c763-4947-a10c-5b6a9f50e259",
+      "ItemId": "PublicFee",
+      "Name": "管理費"
     },
     {
-      "ItemId": "2",
-      "GuId": "",
-      "Name": "水費",
-      "Amount": 0
+      "GuId": "f6ca048b-2582-4ecd-aa73-8599b26fd181",
+      "ItemId": "UtilityFee",
+      "Name": "水費"
     }
   ]
 }

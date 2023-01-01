@@ -5,16 +5,21 @@
         /// <summary>
         /// Id
         /// </summary>
-        public string ItemId { get; set; }
+        public string GuId { get; set; }
 
         /// <summary>
-        /// 參數值
+        /// 參數類型
         /// </summary>
-        public string ItemValue { get; set; }
+        public string ItemType { get; set; }
 
         /// <summary>
         /// 參數名稱
         /// </summary>
-        public string ItemName { get; set; }
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 參數名稱_英文
+        /// </summary>
+        public string Name_En { get; set; }
     }
 }

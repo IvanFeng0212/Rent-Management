@@ -11,11 +11,11 @@ namespace CoreModules.Models
         /// <summary>
         /// 名稱
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// 名稱_英文
         /// </summary>
-        public string Name_En { get; set; }
+        public string? Name_En { get; set; }
     }
 }

@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<PublicFeeService>();
+builder.Services.AddScoped<SysEnumService>();
 
 var app = builder.Build();
 
