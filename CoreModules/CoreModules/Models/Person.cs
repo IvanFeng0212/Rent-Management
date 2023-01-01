@@ -1,15 +1,20 @@
 ﻿namespace CoreModules.Models
 {
-    public class Person
+    public class Person : FeeBase
     {
         /// <summary>
-        /// Id
+        /// 欠款人
         /// </summary>
-        public string GuId { get; set; }
+        public string DebitName { get; set; }
 
         /// <summary>
-        /// 名字
+        /// 收款人
         /// </summary>
-        public string Name { get; set; }
+        public string SideName { get; set; }
+
+        /// <summary>
+        /// 備註
+        /// </summary>
+        public string Remark { get; set; }
     }
 }

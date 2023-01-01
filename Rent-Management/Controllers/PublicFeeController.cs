@@ -36,7 +36,7 @@ namespace Rent_Management.Controllers
                 await this._publicFeeService.AddAsync(data);
             }
 
-            return RedirectToAction("Index");
+            return Ok();
         }
 
         [HttpDelete]

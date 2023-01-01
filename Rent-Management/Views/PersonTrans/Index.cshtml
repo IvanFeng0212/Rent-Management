@@ -1,0 +1,117 @@
+﻿@using CoreModules.Models
+@model PersonViewModel
+
+<div class="container">
+    <div class="row">
+        <form id="form-add">
+            <div class="mb-3 row">
+                <label for="person-debit" class="col-sm-2 col-form-label">欠款人</label>
+                <div class="col-sm-10">
+                    <select id="person-debit" name="debitName" class="form-select">
+                        <option selected value="">===請選擇===</option>
+                        @{
+                            foreach (var item in Model.PersonItems)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+             <div class="mb-3 row">
+                <label for="person-side" class="col-sm-2 col-form-label">收款人</label>
+                <div class="col-sm-10">
+                    <select id="person-side" name="sideName" class="form-select">
+                        <option selected value="">===請選擇===</option>
+                        @{
+                            foreach (var item in Model.PersonItems)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="person-amount" class="col-sm-2 col-form-label">金額</label>
+                <div class="col-sm-10">
+                    <input type="number" min="1" max="30000" name="amount" class="form-control" id="person-amount">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="person-remark" class="col-sm-2 col-form-label">備註</label>
+                <div class="col-sm-10">
+                    <input type="text" name="remark" class="form-control" id="person-remark">
+                </div>
+            </div>
+            <div class="mb-3 col-sm-12 text-center">
+                <button type="submit" id="btn-add-person" class="w-100 btn btn-success">新增</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="table-active">
+                        <th>欠款人</th>
+                        <th>收款人</th>
+                        <th>金額</th>
+                        <th>備註</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var personFee in Model.PersonFees)
+                        {
+                            <tr data-guid="@personFee.GuId">
+                                <td>@personFee.DebitName</td>
+                                <td>@personFee.SideName</td>
+                                <td>@personFee.Amount.ToString("N0")</td>
+                                <td>@personFee.Remark</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-delete" data-guid="@personFee.GuId">刪除</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#form-add").unbind('submit').bind('submit', function (e) {
+            e.preventDefault();
+
+            if (!$('#person-side').val() || 
+                !$('#person-debit').val() || 
+                !$('#person-amount').val() ||
+                !$('#person-remark').val()) return;
+
+            $.ajax({
+                url: 'PersonTrans',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function () {
+                    location.reload();
+                }
+            });
+        });
+
+        $(".btn-delete").unbind('click').bind('click', function () {
+            $.ajax({
+                url: 'PersonTrans',
+                type: 'DELETE',
+                data: { ItemId: $(this).data("guid") },
+                success: function () {
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>

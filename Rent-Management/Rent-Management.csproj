@@ -18,13 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Datas\Persons.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="Datas\PublicFee.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Datas\Transactions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
