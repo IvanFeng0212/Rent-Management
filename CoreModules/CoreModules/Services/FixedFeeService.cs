@@ -23,5 +23,27 @@ namespace CoreModules.Services
         {
             await base.DeleteAsync<FixedFee>(nameof(FixedFee),itemId);
         }
+
+        public async Task<AnnouncementModel> GetAnnouncementModelAsync(AnnouncementModel announcementModel)
+        {
+            var fixedFees = await base.GetAllAsync<FixedFee>(nameof(FixedFee));
+
+            var strs = new List<string>();
+
+            for(int i = 0; i < fixedFees.Count; i += 1)
+            {
+                strs.Add($"{fixedFees[i].Name} : {fixedFees[i].Amount.ToString("N0")}");
+                announcementModel.Amount += fixedFees[i].Amount;
+            }
+
+            if (!string.IsNullOrEmpty(announcementModel.Msg))
+            {
+                strs.Insert(0, announcementModel.Msg);
+            }
+
+            announcementModel.Msg = string.Join(" + ", strs);
+
+            return announcementModel;
+        }
     }
 }

@@ -1,9 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <p>@ViewBag.Env</p>
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+﻿
+<div class="container">
+    <div>
+        @{
+            var env = @ViewBag.Env;
+            if (string.IsNullOrEmpty(env))
+            {
+                <p>No Env Setting</p>
+            }
+            else
+            {
+                <p>Env Ok</p>
+            }
+        }
+    </div>
+    <div class="row">
+        <p id="announcement" style="white-space: pre-line;">@ViewBag.Announcement</p>
+        <button class="btn btn-outline-success" type="button" id="btn-copy">複製</button>
+    </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $('#btn-copy').unbind('click').bind('click',function(){
+            navigator.clipboard.writeText($('#announcement').text().trim());
+        });
+    });
+</script>

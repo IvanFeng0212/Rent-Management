@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Datas\PublicFee.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Folder Include="Datas\" />
   </ItemGroup>
 
 </Project>

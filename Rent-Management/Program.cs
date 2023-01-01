@@ -10,6 +10,7 @@ builder.Services.AddScoped<PublicFeeService>();
 builder.Services.AddScoped<FixedFeeService>();
 builder.Services.AddScoped<SysEnumService>();
 builder.Services.AddScoped<PersonTransService>();
+builder.Services.AddScoped<AnnouncementService>();
 
 var app = builder.Build();
 

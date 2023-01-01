@@ -10,17 +10,20 @@ namespace Rent_Management.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AnnouncementService _announcementService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AnnouncementService announcementService)
         {
-            _logger = logger;
+            this._announcementService = announcementService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var secretKey = Environment.GetEnvironmentVariable("RM_SecretKey");
 
-            ViewBag.Env = string.IsNullOrEmpty(secretKey) ? "None" : secretKey;
+            ViewBag.Env = string.IsNullOrEmpty(secretKey) ? "" : secretKey;
+
+            ViewBag.Announcement = await this._announcementService.GetAnnouncementAsync();
 
             return View();
         }
