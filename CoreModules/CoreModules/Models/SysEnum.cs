@@ -1,25 +1,31 @@
-﻿namespace CoreModules.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CoreModules.Models
 {
     public class SysEnum
     {
         /// <summary>
         /// Id
         /// </summary>
-        public string GuId { get; set; }
+        public string? GuId { get; set; }
 
         /// <summary>
-        /// 參數類型
+        /// 參數項目
         /// </summary>
+        [Required]
         public string ItemType { get; set; }
+
+        /// <summary>
+        /// 參數項目名稱
+        /// </summary>
+        [Required]
+        public string ItemTypeName { get; set; }
 
         /// <summary>
         /// 參數名稱
         /// </summary>
+        [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
-
-        /// <summary>
-        /// 參數名稱_英文
-        /// </summary>
-        public string Name_En { get; set; }
     }
 }

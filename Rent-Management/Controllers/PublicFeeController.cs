@@ -21,7 +21,7 @@ namespace Rent_Management.Controllers
             var viewModel = new PublicFeeViewModel()
             {
                 PublicFees = await this._publicFeeService.GetAllAsync(),
-                PublicFeeItems = await this._sysEnumService.GetByType(nameof(PublicFee))
+                PublicFeeItems = await this._sysEnumService.GetByTypeAsync(nameof(PublicFee))
             };
 
             return View(viewModel);
