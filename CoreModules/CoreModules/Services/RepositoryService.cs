@@ -68,7 +68,14 @@ namespace CoreModules.Services
 
         private string GetJsonFilePath(string jsonFileName)
         {
-            return Path.Combine(Environment.CurrentDirectory, "Datas", $"{jsonFileName}.json");
+            var dirPath = Path.Combine(Environment.CurrentDirectory, "Datas");
+
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+
+            return Path.Combine(dirPath, $"{jsonFileName}.json");
         }
 
         private async Task SaveAsync<T>(string jsonFileName,List<T> datas)

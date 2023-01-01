@@ -43,6 +43,8 @@ namespace CoreModules.Services
             var avgFee =
                 await this.GivenPersonDicAsync(announcementModel.Amount);
 
+            if (personDic.Count == 0) return announcementModel;
+
             await UpdatePersonDic();
 
             announcementModel.Msg = this.CombinMsg(announcementModel, avgFee);
@@ -53,6 +55,8 @@ namespace CoreModules.Services
         private async Task<int> GivenPersonDicAsync(int totalFee)
         {
             var personSysEnums = await this._sysEnumService.GetByTypeAsync(nameof(Person));
+
+            if (personSysEnums.Count == 0) return 0;
 
             var avgFee = 
                 (int)Math.Floor(Convert.ToDecimal(totalFee / personSysEnums.Count));
@@ -85,13 +89,16 @@ namespace CoreModules.Services
         {
             var stringBuilder = new StringBuilder();
 
-            // 管理費 : xx,xxx + 房租 : xxxx + 水費 : xxx = xx,xxx
-            stringBuilder.AppendLine($"{announcementModel.Msg} = {announcementModel.Amount.ToString("N0")}");
+            if (!string.IsNullOrEmpty(announcementModel.Msg))
+            {
+                // 管理費 : xx,xxx + 房租 : xxxx + 水費 : xxx = xx,xxx
+                stringBuilder.AppendLine($"{announcementModel.Msg} = {announcementModel.Amount.ToString("N0")}");
 
-            // 基本: xx,xxx / x = x,xxx
-            stringBuilder.AppendLine($"基本 : {announcementModel.Amount} / {personDic.Count} = {avgFee.ToString("N0")}");
+                // 基本: xx,xxx / x = x,xxx
+                stringBuilder.AppendLine($"基本 : {announcementModel.Amount} / {personDic.Count} = {avgFee.ToString("N0")}");
 
-            stringBuilder.AppendLine("----------------------------------------");
+                stringBuilder.AppendLine("----------------------------------------");
+            }
 
             // P : 基本 x,xxx (+/- 人員欠債費用) = x,xxx
             foreach (var personName in personDic)

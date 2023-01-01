@@ -42,12 +42,23 @@ namespace CoreModules.Services
 
         public async Task AddAsync(SysEnum data)
         {
+            var isRepeat = await this.CheckRepeat(data);
+
+            if (isRepeat) return;
+
             await base.AddAsync<SysEnum>(nameof(SysEnum), data);
         }
 
         public async Task DeleteAsync(string itemId)
         {
             await base.DeleteAsync<SysEnum>(nameof(SysEnum), itemId);
+        }
+
+        private async Task<bool> CheckRepeat(SysEnum data)
+        {
+            var sysEnums = await this.GetAllAsync();
+
+            return sysEnums.Any(s => s.Name == data.Name);
         }
     }
 }
