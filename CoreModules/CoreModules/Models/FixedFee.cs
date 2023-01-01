@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreModules.Models
 {
-    public class PublicFee : FeeBase
+    public class FixedFee : FeeBase
     {
         /// <summary>
         /// 名稱

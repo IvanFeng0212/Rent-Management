@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace CoreModules.Models
 {
-    public class PublicFee : FeeBase
+    public class FixedFeeViewModel
     {
-        /// <summary>
-        /// 名稱
-        /// </summary>
-        public string? Name { get; set; }
+        public List<FixedFee> FixedFees { get; set; }
+
+        public List<SysEnum> FixedFeeItems { get; set; }
     }
 }

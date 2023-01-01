@@ -14,7 +14,8 @@ namespace CoreModules.Services
         {
             this.sysEnumDic = new Dictionary<string, string>()
             {
-                {nameof(PublicFee),"公共費用" }
+                { nameof(FixedFee),"固定費用"},
+                { nameof(PublicFee),"公共費用" }
             };
         }
 
