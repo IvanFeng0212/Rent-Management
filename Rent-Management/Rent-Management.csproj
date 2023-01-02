@@ -21,4 +21,19 @@
     <Folder Include="Datas\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Datas\FixedFee.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datas\Person.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datas\PublicFee.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datas\SysEnum.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
