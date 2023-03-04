@@ -7,12 +7,12 @@ namespace Rent_Management.Controllers
     public class FixedFeeController : Controller
     {
         private readonly FixedFeeService _fixedFeeService;
-        private readonly SysEnumService _sysEnumService;
+        private readonly SystemEnumService _systemEnumService;
 
-        public FixedFeeController(FixedFeeService fixedFeeService, SysEnumService sysEnumService)
+        public FixedFeeController(FixedFeeService fixedFeeService, SystemEnumService systemEnumService)
         {
             this._fixedFeeService = fixedFeeService;
-            this._sysEnumService = sysEnumService;
+            this._systemEnumService = systemEnumService;
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace Rent_Management.Controllers
             var viewModel = new FixedFeeViewModel()
             {
                 FixedFees = await this._fixedFeeService.GetAllAsync(),
-                FixedFeeItems = await this._sysEnumService.GetByTypeAsync(nameof(FixedFee))
+                FixedFeeItems = await this._systemEnumService.GetByTypeAsync(nameof(FixedFee))
             };
 
             return View(viewModel);

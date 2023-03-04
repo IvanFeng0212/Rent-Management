@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CoreModules.Models
 {
-    public class SysEnumViewModel
+    public class SystemEnumViewModel
     {
-        public List<SysEnum> SysEnums { get; set; }
+        public List<SystemEnum> SysEnums { get; set; }
 
-        public List<SysEnum> ItemList { get; set; }
+        public List<SystemEnum> ItemList { get; set; }
     }
 }

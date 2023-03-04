@@ -1,5 +1,5 @@
 ﻿@using CoreModules.Models
-@model SysEnumViewModel
+@model SystemEnumViewModel
 
 <div class="container">
     <div class="row">
@@ -72,7 +72,7 @@
             if (!$('#sysEnum-item').val() || !$('#sysEnum-name').val()) return;
 
             $.ajax({
-                url: 'SysEnum',
+                url: 'SystemEnum',
                 type: 'POST',
                 data: $(this).serialize() + '&' + 'itemTypeName=' + selectItemTypeName,
                 success: function () {
@@ -83,7 +83,7 @@
 
         $(".btn-delete").unbind('click').bind('click', function () {
             $.ajax({
-                url: 'SysEnum',
+                url: 'SystemEnum',
                 type: 'DELETE',
                 data: { ItemId: $(this).data("guid") },
                 success: function () {

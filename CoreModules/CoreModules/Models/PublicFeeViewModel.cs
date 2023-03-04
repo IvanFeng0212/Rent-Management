@@ -10,6 +10,6 @@ namespace CoreModules.Models
     {
         public List<PublicFee> PublicFees { get; set; }
 
-        public List<SysEnum> PublicFeeItems { get; set; }
+        public List<SystemEnum> PublicFeeItems { get; set; }
     }
 }

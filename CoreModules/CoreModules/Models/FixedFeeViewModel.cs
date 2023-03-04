@@ -10,6 +10,6 @@ namespace CoreModules.Models
     {
         public List<FixedFee> FixedFees { get; set; }
 
-        public List<SysEnum> FixedFeeItems { get; set; }
+        public List<SystemEnum> FixedFeeItems { get; set; }
     }
 }

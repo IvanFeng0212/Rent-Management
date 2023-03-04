@@ -8,40 +8,43 @@ using System.Xml.Linq;
 
 namespace CoreModules.Services
 {
-    public class PersonTransService : RepositoryService
+    public class PersonOweService : RepositoryService
     {
         private readonly Dictionary<string, int> personRentDic;
         private readonly Dictionary<string, string> personMsgDic;
         private readonly HashSet<string> personDic;
-        private readonly SysEnumService _sysEnumService;
+        private readonly SystemEnumService _systemEnumService;
 
-        public PersonTransService(SysEnumService sysEnumService)
+        public PersonOweService(SystemEnumService systemEnumService)
         {
             personRentDic = new Dictionary<string, int>();
             personMsgDic = new Dictionary<string, string>();
             personDic = new HashSet<string>();
-            this._sysEnumService = sysEnumService;
+            this._systemEnumService = systemEnumService;
         }
 
-        public async Task<List<Person>> GetAllAsync()
+        public async Task<List<PersonOwe>> GetAllAsync()
         {
-            return await base.GetAllAsync<Person>(nameof(Person));
+            return await base.GetAllAsync<PersonOwe>(nameof(PersonOwe));
         }
 
-        public async Task AddAsync(Person data)
+        public async Task AddAsync(PersonOwe data)
         {
-            await base.AddAsync<Person>(nameof(Person), data);
+            await base.AddAsync<PersonOwe>(nameof(PersonOwe), data);
         }
 
         public async Task DeleteAsync(string itemId)
         {
-            await base.DeleteAsync<Person>(nameof(Person),itemId);
+            await base.DeleteAsync<PersonOwe>(nameof(PersonOwe),itemId);
         }
 
         public async Task<AnnouncementModel> GetAnnouncementModelAsync(AnnouncementModel announcementModel)
         {
-            var avgFee =
-                await this.GivenPersonDicAsync(announcementModel.Amount);
+            var personOwes = await this._systemEnumService.GetByTypeAsync(nameof(PersonOwe));
+
+            var avgFee = this.GetAvgFee(announcementModel.Amount, personOwes);
+
+            SetPersonDic(avgFee, personOwes);
 
             if (personDic.Count == 0) return announcementModel;
 
@@ -52,28 +55,26 @@ namespace CoreModules.Services
             return announcementModel;
         }
 
-        private async Task<int> GivenPersonDicAsync(int totalFee)
+        private int GetAvgFee(int totalFee, List<SystemEnum> personOwes)
         {
-            var personSysEnums = await this._sysEnumService.GetByTypeAsync(nameof(Person));
+            if (personOwes.Count == 0) return 0;
 
-            if (personSysEnums.Count == 0) return 0;
+            return (int)Math.Floor(Convert.ToDecimal(totalFee / personOwes.Count));
+        }
 
-            var avgFee = 
-                (int)Math.Floor(Convert.ToDecimal(totalFee / personSysEnums.Count));
-
-            personSysEnums.ForEach(p =>
+        private void SetPersonDic(int avgFee, List<SystemEnum> personOwes) 
+        {
+            personOwes.ForEach(p =>
             {
                 personDic.Add(p.Name);
                 personRentDic.TryAdd(p.Name, avgFee);
                 personMsgDic.TryAdd(p.Name, $"基本 {avgFee.ToString("N0")}");
             });
-
-            return avgFee;
         }
 
         private async Task UpdatePersonDic()
         {
-            var persons = await base.GetAllAsync<Person>(nameof(Person));
+            var persons = await base.GetAllAsync<PersonOwe>(nameof(PersonOwe));
 
             persons.ForEach(p =>
             {

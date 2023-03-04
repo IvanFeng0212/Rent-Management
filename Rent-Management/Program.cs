@@ -8,8 +8,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<PublicFeeService>();
 builder.Services.AddScoped<FixedFeeService>();
-builder.Services.AddScoped<SysEnumService>();
-builder.Services.AddScoped<PersonTransService>();
+builder.Services.AddScoped<SystemEnumService>();
+builder.Services.AddScoped<PersonOweService>();
 builder.Services.AddScoped<AnnouncementService>();
 
 var app = builder.Build();

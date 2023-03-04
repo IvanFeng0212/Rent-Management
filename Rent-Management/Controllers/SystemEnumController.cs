@@ -4,22 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Rent_Management.Controllers
 {
-    public class SysEnumController : Controller
+    public class SystemEnumController : Controller
     {
-        private readonly SysEnumService _sysEnumService;
+        private readonly SystemEnumService _systemEnumService;
 
-        public SysEnumController(SysEnumService sysEnumService)
+        public SystemEnumController(SystemEnumService systemEnumService)
         {
-            this._sysEnumService = sysEnumService;
+            this._systemEnumService = systemEnumService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var viewModel = new SysEnumViewModel()
+            var viewModel = new SystemEnumViewModel()
             {
-                SysEnums = await this._sysEnumService.GetAllAsync(),
-                ItemList = this._sysEnumService.GetItemList()
+                SysEnums = await this._systemEnumService.GetAllAsync(),
+                ItemList = this._systemEnumService.GetItemList()
             };
 
             return View(viewModel);
@@ -27,11 +27,11 @@ namespace Rent_Management.Controllers
 
         [HttpPost]
         [Route("SysEnum")]
-        public async Task<IActionResult> SysEnum(SysEnum data)
+        public async Task<IActionResult> SysEnum(SystemEnum data)
         {
             if (ModelState.IsValid)
             {
-                await this._sysEnumService.AddAsync(data);
+                await this._systemEnumService.AddAsync(data);
             }
 
             return Ok();
@@ -41,7 +41,7 @@ namespace Rent_Management.Controllers
         [Route("SysEnum")]
         public async Task<IActionResult> SysEnum(string itemId)
         {
-            await this._sysEnumService.DeleteAsync(itemId);
+            await this._systemEnumService.DeleteAsync(itemId);
 
             return Ok();
         }

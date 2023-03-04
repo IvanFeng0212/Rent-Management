@@ -7,12 +7,12 @@ namespace Rent_Management.Controllers
     public class PublicFeeController : Controller
     {
         private readonly PublicFeeService _publicFeeService;
-        private readonly SysEnumService _sysEnumService;
+        private readonly SystemEnumService _systemEnumService;
 
-        public PublicFeeController(PublicFeeService publicFeeService, SysEnumService sysEnumService)
+        public PublicFeeController(PublicFeeService publicFeeService, SystemEnumService systemEnumService)
         {
             this._publicFeeService = publicFeeService;
-            this._sysEnumService = sysEnumService;
+            this._systemEnumService = systemEnumService;
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace Rent_Management.Controllers
             var viewModel = new PublicFeeViewModel()
             {
                 PublicFees = await this._publicFeeService.GetAllAsync(),
-                PublicFeeItems = await this._sysEnumService.GetByTypeAsync(nameof(PublicFee))
+                PublicFeeItems = await this._systemEnumService.GetByTypeAsync(nameof(PublicFee))
             };
 
             return View(viewModel);

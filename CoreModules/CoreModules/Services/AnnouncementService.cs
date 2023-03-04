@@ -11,19 +11,19 @@ namespace CoreModules.Services
     {
         private readonly FixedFeeService _fixedFeeService;
         private readonly PublicFeeService _publicFeeService;
-        private readonly PersonTransService _personTransService;
-        private readonly SysEnumService _sysEnumService;
+        private readonly PersonOweService _personOweService;
+        private readonly SystemEnumService _systemEnumService;
 
         public AnnouncementService(
             FixedFeeService fixedFeeService,
             PublicFeeService publicFeeService,
-            PersonTransService personTransService,
-            SysEnumService sysEnumService)
+            PersonOweService personOweService,
+            SystemEnumService systemEnumService)
         {
             this._fixedFeeService = fixedFeeService;
             this._publicFeeService = publicFeeService;
-            this._personTransService = personTransService;
-            this._sysEnumService = sysEnumService;
+            this._personOweService = personOweService;
+            this._systemEnumService = systemEnumService;
         }
 
         public async Task<string> GetAnnouncementAsync()
@@ -35,19 +35,19 @@ namespace CoreModules.Services
                 await this._publicFeeService.GetAnnouncementModelAsync(announcementModel);
 
             announcementModel =
-                await this._personTransService.GetAnnouncementModelAsync(announcementModel);
+                await this._personOweService.GetAnnouncementModelAsync(announcementModel);
 
             return announcementModel.Msg;
         }
 
-        public async Task DeleteNoMatchSysEnumAsync()
+        public async Task DeleteNoMatchSystemEnumAsync()
         {
-            var sysEnums = await this._sysEnumService.GetAllAsync();
+            var systemEnums = await this._systemEnumService.GetAllAsync();
 
-            var sysEnumNames = sysEnums.Select(x => x.Name).ToList();
+            var systemEnumNames = systemEnums.Select(x => x.Name).ToList();
 
             var fixedFees = await this._fixedFeeService.GetAllAsync();
-            fixedFees.Where(f => !sysEnumNames.Contains(f.Name))
+            fixedFees.Where(f => !systemEnumNames.Contains(f.Name))
                 .ToList()
                 .ForEach(async (f) =>
                 {
@@ -55,19 +55,19 @@ namespace CoreModules.Services
                 });
 
             var publicFees = await this._publicFeeService.GetAllAsync();
-            publicFees.Where(p => !sysEnumNames.Contains(p.Name))
+            publicFees.Where(p => !systemEnumNames.Contains(p.Name))
                 .ToList()
                 .ForEach(async (p) =>
                 {
                     await this._publicFeeService.DeleteAsync(p.GuId);
                 });
 
-            var personFees = await this._personTransService.GetAllAsync();
-            personFees.Where(p => !sysEnumNames.Contains(p.DebitName) || !sysEnumNames.Contains(p.SideName))
+            var personFees = await this._personOweService.GetAllAsync();
+            personFees.Where(p => !systemEnumNames.Contains(p.DebitName) || !systemEnumNames.Contains(p.SideName))
                 .ToList()
                 .ForEach(async (p) =>
                 {
-                    await this._personTransService.DeleteAsync(p.GuId);
+                    await this._personOweService.DeleteAsync(p.GuId);
                 });
         }
     }

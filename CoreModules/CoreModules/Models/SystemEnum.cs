@@ -2,7 +2,7 @@
 
 namespace CoreModules.Models
 {
-    public class SysEnum
+    public class SystemEnum
     {
         /// <summary>
         /// Id

@@ -94,7 +94,7 @@
                 !$('#person-remark').val()) return;
 
             $.ajax({
-                url: 'PersonTrans',
+                url: 'PersonOwe',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function () {
@@ -105,7 +105,7 @@
 
         $(".btn-delete").unbind('click').bind('click', function () {
             $.ajax({
-                url: 'PersonTrans',
+                url: 'PersonOwe',
                 type: 'DELETE',
                 data: { ItemId: $(this).data("guid") },
                 success: function () {

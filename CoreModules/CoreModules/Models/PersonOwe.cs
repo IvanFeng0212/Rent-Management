@@ -1,6 +1,6 @@
 ﻿namespace CoreModules.Models
 {
-    public class Person : FeeBase
+    public class PersonOwe : FeeBase
     {
         /// <summary>
         /// 欠款人

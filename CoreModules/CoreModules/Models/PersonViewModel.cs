@@ -8,8 +8,8 @@ namespace CoreModules.Models
 {
     public class PersonViewModel
     {
-        public List<Person> PersonFees { get; set; }
+        public List<PersonOwe> PersonFees { get; set; }
 
-        public List<SysEnum> PersonItems { get; set; }
+        public List<SystemEnum> PersonItems { get; set; }
     }
 }
