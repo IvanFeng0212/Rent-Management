@@ -9,7 +9,7 @@ namespace CoreModules.Services
         /// </summary>
         protected async Task<List<T>> GetAllAsync<T>(string tableName)
         {
-           return await FirebaseHelper.GetAllAsync<T>(tableName);
+           return await FirebaseHelper.GetAllWithoutEmptyAsync<T>(tableName);
         }
 
         /// <summary>

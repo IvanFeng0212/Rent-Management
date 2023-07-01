@@ -11,6 +11,11 @@ namespace CoreModules.Helpers
 {
     public class FirebaseHelper
     {
+        public static async Task<List<T>> GetAllWithoutEmptyAsync<T>(string tableName)
+        {
+            return (await GetAllAsync<T>(tableName)).Where(x => x != null).ToList();
+        }
+
         public static async Task<List<T>> GetAllAsync<T>(string tableName)
         {
             try
@@ -25,7 +30,7 @@ namespace CoreModules.Helpers
 
                     return JsonConvert.DeserializeObject<List<T>>(jsonContent) ?? new List<T>();
                 }
-            } 
+            }
             catch
             {
                 return new List<T>();
@@ -42,14 +47,13 @@ namespace CoreModules.Helpers
                 {
                     insertData.GetType().GetProperty("GuId").SetValue(insertData, Guid.NewGuid().ToString());
 
-                    var datas = await GetAllAsync<T>(tableName);
+                    var datas = await GetAllWithoutEmptyAsync<T>(tableName);
 
                     await firebaseClient.Child(tableName).Child(datas.Count.ToString()).PutAsync(insertData);
                 }
             }
             finally
             {
-                // TODO               
             }
         }
 
@@ -62,7 +66,7 @@ namespace CoreModules.Helpers
                     var datas = await GetAllAsync<T>(tableName);
 
                     var dataIndex = datas
-                        .FindIndex(d => d.GetType().GetProperty("GuId").GetValue(d).ToString() == itemId);
+                        .FindIndex(d => d != null && d.GetType().GetProperty("GuId").GetValue(d).ToString() == itemId);
 
                     if (dataIndex == -1) return;
 
@@ -70,12 +74,10 @@ namespace CoreModules.Helpers
 
                     // Delete the child node
                     await firebaseClient.Child(childNode).DeleteAsync();
-
                 }
             }
             finally
             {
-                // TODO               
             }
         }
 

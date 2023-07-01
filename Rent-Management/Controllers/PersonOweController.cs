@@ -29,7 +29,7 @@ namespace Rent_Management.Controllers
 
         [HttpPost]
         [Route("PersonOwe")]
-        public async Task<IActionResult> FixedFee(PersonOwe data)
+        public async Task<IActionResult> PersonOwe(PersonOwe data)
         {
             if (ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace Rent_Management.Controllers
 
         [HttpDelete]
         [Route("PersonOwe")]
-        public async Task<IActionResult> FixedFee(string itemId)
+        public async Task<IActionResult> PersonOwe(string itemId)
         {
             await this._personOweService.DeleteAsync(itemId);
 

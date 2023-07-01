@@ -1,4 +1,5 @@
 ﻿using CoreModules.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace CoreModules.Services
 
         public async Task DeleteAsync(string itemId)
         {
-            await base.DeleteAsync<PersonOwe>(nameof(PersonOwe),itemId);
+            await base.DeleteAsync<PersonOwe>(nameof(PersonOwe), itemId);
         }
 
         public async Task<AnnouncementModel> GetAnnouncementModelAsync(AnnouncementModel announcementModel)
@@ -62,7 +63,7 @@ namespace CoreModules.Services
             return (int)Math.Floor(Convert.ToDecimal(totalFee / personOwes.Count));
         }
 
-        private void SetPersonDic(int avgFee, List<SystemEnum> personOwes) 
+        private void SetPersonDic(int avgFee, List<SystemEnum> personOwes)
         {
             personOwes.ForEach(p =>
             {
@@ -76,17 +77,24 @@ namespace CoreModules.Services
         {
             var persons = await base.GetAllAsync<PersonOwe>(nameof(PersonOwe));
 
-            persons.ForEach(p =>
+            var groups = persons.GroupBy(x => new { x.SideName, x.Remark });
+            foreach (var group in groups)
             {
-                personRentDic[p.DebitName] += p.Amount;
-                personMsgDic[p.DebitName] += $" + {p.Remark} : {p.Amount.ToString("N0")}";
+                var sideName = group.First().SideName;
+                var subAmt = group.Sum(x => x.Amount);
+                var subItem = group.First().Remark;
+                personRentDic[sideName] -= subAmt;
+                personMsgDic[sideName] += $" - {subItem} : {subAmt.ToString("N0")}";
 
-                personRentDic[p.SideName] -= p.Amount;
-                personMsgDic[p.SideName] += $" - {p.Remark} : {p.Amount.ToString("N0")}";
-            });
+                group.ToList().ForEach(x =>
+                {
+                    personRentDic[x.DebitName] += x.Amount;
+                    personMsgDic[x.DebitName] += $" + {x.Remark} : {x.Amount.ToString("N0")}";
+                });
+            }
         }
 
-        private string CombinMsg(AnnouncementModel announcementModel,int avgFee)
+        private string CombinMsg(AnnouncementModel announcementModel, int avgFee)
         {
             var stringBuilder = new StringBuilder();
 

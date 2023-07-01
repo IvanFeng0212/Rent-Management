@@ -26,7 +26,7 @@ namespace Rent_Management.Controllers
         }
 
         [HttpPost]
-        [Route("SysEnum")]
+        [Route("SystemEnum")]
         public async Task<IActionResult> SysEnum(SystemEnum data)
         {
             if (ModelState.IsValid)
@@ -38,7 +38,7 @@ namespace Rent_Management.Controllers
         }
 
         [HttpDelete]
-        [Route("SysEnum")]
+        [Route("SystemEnum")]
         public async Task<IActionResult> SysEnum(string itemId)
         {
             await this._systemEnumService.DeleteAsync(itemId);
